@@ -1,4 +1,3 @@
-
 # Import the required libraries
 import matplotlib.pylab as plt
 import cv2
@@ -33,6 +32,7 @@ def region_of_interest(image):
   masked_image = cv2.bitwise_and(image, mask)
   return masked_image
 
+# Loop over all lines and draw them on the blank image
 def display_lines(image, lines):
     line_image = np.zeros_like(image)
     if lines is not None:
@@ -41,6 +41,7 @@ def display_lines(image, lines):
             cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 10)
     return line_image
 
+# Run the code on the video   
 cap = cv2.VideoCapture("./test.mp4")
 while(cap.isOpened()):
     _, frame = cap.read()
