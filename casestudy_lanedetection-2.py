@@ -9,8 +9,6 @@ lane_image = cv2.imread('image_lane.jpeg')
 # The src (source) is our image which is the variable
 colored_image = cv2.cvtColor(lane_image, cv2.COLOR_BGR2RGB)
 
-# Show a window with the colored road image
-
 # Find out the shape of the image, defining height (1442) and width (2560)
 height = lane_image.shape[0]
 width = lane_image.shape[1]
@@ -59,9 +57,3 @@ while(cap.isOpened()):
         break
 cap.release()
 cv2.destroyAllWindows()
-
-#plt.imshow(line_image)
-#plt.imshow(lane_image, alpha=0.6)
-#plt.show()
-#combo_image = cv2.addWeighted (lane_image, 0.5, line_image, 1, 1)
-#cv2.imshow ("Image", combo_image)
