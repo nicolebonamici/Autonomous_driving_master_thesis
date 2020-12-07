@@ -6,7 +6,6 @@ import numpy as np
 lane_image = cv2.imread('image_lane.jpeg')
 
 # Convert the image in to RBG format using matplotlib
-# The src (source) is our image which is the variable
 colored_image = cv2.cvtColor(lane_image, cv2.COLOR_BGR2RGB)
 
 # Find out the shape of the image, defining height (1442) and width (2560)
