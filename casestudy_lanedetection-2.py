@@ -3,7 +3,7 @@ import matplotlib.pylab as plt
 import cv2
 import numpy as np
 
-lane_image = cv2.imread('image_lane.jpeg')
+lane_image = cv2.imread('media/image_lane.jpeg')
 
 # Convert the image in to RBG format using matplotlib
 colored_image = cv2.cvtColor(lane_image, cv2.COLOR_BGR2RGB)
@@ -39,7 +39,7 @@ def display_lines(image, lines):
     return line_image
 
 # Run the code on the video   
-cap = cv2.VideoCapture("./test.mp4")
+cap = cv2.VideoCapture("./media/test.mp4")
 while(cap.isOpened()):
     _, frame = cap.read()
     canny = CannyEdge(frame)
