@@ -2,6 +2,8 @@
 import matplotlib.pylab as plt
 import cv2
 import numpy as np
+import os
+import shutil
 
 lane_image = cv2.imread('media/image_lane.jpeg')
 
@@ -40,8 +42,19 @@ def display_lines(image, lines):
 
 # Run the code on the video   
 cap = cv2.VideoCapture("./media/test.mp4")
+
+# Create out directory for the frame of the resulting video
+if not os.path.exists('out'):
+    os.makedirs('out')
+else:
+  shutil.rmtree('out') # delete previous content of out folder
+  os.makedirs('out')
+
+frame_number = 0
 while(cap.isOpened()):
-    _, frame = cap.read()
+    frame_is_valid, frame = cap.read()
+    if frame_is_valid is False: # stop execution if frame is invalid, typically end of file
+      break
     canny = CannyEdge(frame)
     cropped_Image = region_of_interest(canny)
     rho = 2
@@ -52,7 +65,12 @@ while(cap.isOpened()):
 
     combo_image = cv2.addWeighted(frame, 0.6, line_image, 1, 1)
     cv2.imshow("Image", combo_image)
+    cv2.imwrite('./out/frame_' + str(frame_number).zfill(7) + '.jpg', combo_image) # write frame to out folder
+    frame_number += 1
     if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+      break
 cap.release()
 cv2.destroyAllWindows()
+
+# save images with ffmpeg command
+os.system("ffmpeg -framerate 24 -i ./out/frame_%07d.jpg output.mp4")
